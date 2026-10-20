@@ -1,0 +1,17 @@
+# Render.com blueprint: one web service serves the API and the built UI.
+services:
+  - type: web
+    name: eec-alumni-connect
+    runtime: node
+    buildCommand: npm run setup && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
